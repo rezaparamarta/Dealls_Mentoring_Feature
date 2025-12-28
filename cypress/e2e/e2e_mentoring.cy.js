@@ -22,7 +22,9 @@ describe('Mentoring Feature', () => {
       waNumber: `628${Math.floor(100000000 + Math.random() * 900000000)}`,
       password: 'Reza12345!',
     };
+    // Use custom command to register user
     cy.register(user);
+    // Assert registration success by checking for download button visibility
     cy.xpath("//button[normalize-space()='Unduh Sekarang']").should('be.visible');
   });
     // Test case for user login and mentoring feature  
