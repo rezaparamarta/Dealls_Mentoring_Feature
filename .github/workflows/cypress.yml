@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Ambil source code dari repo
+      # Step 1: Get SOurce code from repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
