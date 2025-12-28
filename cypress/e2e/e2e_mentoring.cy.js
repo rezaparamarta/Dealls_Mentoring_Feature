@@ -1,4 +1,7 @@
+import MentoringPage from '../pages/mentoringPage';
+
 describe('Mentoring Feature', () => {
+    const mentoringPage = new MentoringPage()
     // This function generate a random string for unique user data registration
     function randomString(length = 8) {
       const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -32,17 +35,12 @@ describe('Mentoring Feature', () => {
     // Login using custom command
     cy.login(Cypress.env('EMAIL'), Cypress.env('PASSWORD'));
     // Assert login success (mentoring menu visible)
-    cy.get(
-      'li[id="navigation-item-mentoring"] a[class="inline-block py-1 text-xs !font-semibold text-white !decoration-2 !underline-offset-4 hover:!text-gray-200 hover:underline"]'
-    )
-      .contains('Mentoring')
-      .should('be.visible');
-    cy.contains('Mentoring').click();
+    mentoringPage.openMentoringMenu();
     // Search for a mentor
-    cy.get('#searchMentor').type('QA Engineer');
-    // Assert search results
-    cy.contains('QA Software Engineer').click();
-    // Assert mentor detail page
-    cy.contains('About').should('be.visible');
+    mentoringPage.searchMentor('QA Engineer');
+    // Assert search results contain expected mentor
+    mentoringPage.openMentorFromResult('QA Software Engineer');
+    // Assert mentor detail page is visible
+    mentoringPage.mentorDetailShouldBeVisible();
   });
 });
